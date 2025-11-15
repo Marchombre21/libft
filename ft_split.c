@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:19:47 by bfitte            #+#    #+#             */
-/*   Updated: 2025/11/14 18:11:24 by bfitte           ###   ########.fr       */
+/*   Updated: 2025/11/15 12:51:07 by bfitte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,13 @@ static void	add_word(int *index_words, int	*nb_words, int i, int j)
 	(*nb_words)++;
 }
 
-static void	free_array(int *array)
+static void	free_array(char **array, int i)
 {
+	while (i >= 0)
+	{
+		free(array[i]);
+		i--;
+	}
 	free(array);
 }
 
@@ -67,7 +72,7 @@ static void	ft_count_words(char const *s, char c, int *index_words,
 		add_word(index_words, nb_words, i, j);
 }
 
-static void	ft_fill_array(char **array, char const *s,
+static char	**ft_fill_array(char **array, char const *s,
 	int *index, int *nb_words)
 {
 	int	i;
@@ -81,8 +86,8 @@ static void	ft_fill_array(char **array, char const *s,
 		array[i] = ft_calloc(((index[j + 1] - index[j] + 1) + 1), 1);
 		if (!array[i])
 		{
-			free_array(index);
-			return ;
+			free_array(array, i - 1);
+			return (NULL);
 		}
 		k = 0;
 		while (index[j] <= index[j + 1])
@@ -94,6 +99,7 @@ static void	ft_fill_array(char **array, char const *s,
 		i++;
 		j = j + 2;
 	}
+	return (array);
 }
 
 char	**ft_split(char const *s, char c)
@@ -112,10 +118,10 @@ char	**ft_split(char const *s, char c)
 	array = ft_calloc(nb_words + 1, sizeof(char *));
 	if (!array)
 	{
-		free_array(index_words);
+		free(index_words);
 		return (NULL);
 	}
-	ft_fill_array(array, s, index_words, &nb_words);
+	array = ft_fill_array(array, s, index_words, &nb_words);
 	free(index_words);
 	return (array);
 }

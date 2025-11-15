@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 09:45:05 by bfitte            #+#    #+#             */
-/*   Updated: 2025/11/14 16:33:06 by bfitte           ###   ########.fr       */
+/*   Updated: 2025/11/15 12:08:33 by bfitte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 // {
 // 	char	*new_str;
 
-// 	new_str = ft_substr("tripouille", 0, 42000);
-// 	printf("%s\n", new_str);
-// 	printf("%s\n", new_str);
+// 	new_str = ft_substr("", 1, 1);
 // 	printf("%s\n", new_str);
 // 	free(new_str);
 // 	return (0);
@@ -29,7 +27,9 @@ static int	ft_size_malloc(char const *s, unsigned int start, size_t len)
 	unsigned int	s_len;
 
 	s_len = ft_strlen(s);
-	if ((s_len - 1) < start)
+	if (s_len == 0 && start != 0)
+		return (0);
+	else if ((s_len - 1) < start)
 		return (0);
 	else if ((s_len - start) <= (unsigned int)len)
 		return (s_len - start);

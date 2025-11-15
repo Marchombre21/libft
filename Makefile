@@ -6,7 +6,7 @@
 #    By: bfitte <bfitte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/06 06:57:02 by bfitte            #+#    #+#              #
-#    Updated: 2025/11/15 10:33:18 by bfitte           ###   ########.fr        #
+#    Updated: 2025/11/15 13:14:57 by bfitte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,9 +81,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC_FILES) $(BONUS_FILES)
-	gcc -nostartfiles -shared -o libft.so $(OBJ) $(OBJ_BONUS)
 
 .PHONY: all clean fclean re
